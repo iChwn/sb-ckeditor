@@ -6,24 +6,14 @@ import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classicedi
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+import { Bold, Strikethrough, Italic } from '@ckeditor/ckeditor5-basic-styles'
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 // import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 // import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
-import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
-import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
-import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
-import FontSize from '@ckeditor/ckeditor5-font/src/fontsize';
+import { FontBackgroundColor, FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font'
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
-import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
-import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
-import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
-import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
+import { ImageInsert, Image, ImageCaption, ImageStyle, ImageResize, ImageToolbar, ImageUpload} from '@ckeditor/ckeditor5-image'
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
@@ -38,6 +28,8 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
+import CustomImageUploadAdapter from './ckAdapter/CustomImageUploadAdapter';
+
 
 /** @ts-ignore */
 class SbEditor extends ClassicEditorBase {
@@ -47,6 +39,7 @@ class SbEditor extends ClassicEditorBase {
 	}
 
 	static builtinPlugins = [
+		CustomImageUploadAdapter,
 		Essentials,
 		UploadAdapter,
 		Autoformat,
@@ -78,8 +71,9 @@ class SbEditor extends ClassicEditorBase {
 		FontSize,
 		Alignment,
 		// Fill,
-		Base64UploadAdapter,
-		BlockQuote
+		// Base64UploadAdapter,
+		BlockQuote,
+		ImageInsert
 	];
 	
 	// Editor configuration.
@@ -105,10 +99,10 @@ class SbEditor extends ClassicEditorBase {
 				'fontBackgroundColor',
 				'alignment',
 				'|',
-				'imageUpload',
+				// 'imageUpload',
+				'insertImage',
 				'insertTable',
 				'mediaEmbed',
-				'audio',
 				'undo',
 				'redo',
 				'|'
@@ -170,25 +164,6 @@ class SbEditor extends ClassicEditorBase {
 				'big'
 			]
 		},
-		// fillConfig: '',
-		// isFIllDisable: false,
-		// alertConfig: {
-		// 	errorMessage: 'You need to write the Answer!',
-		// 	alertTitle: 'Fill the Answer',
-		// 	sweetStyle: {
-		// 		width: '500px',
-		// 		padding: '1.25em',
-		// 		confirmButtonText: 'Save',
-		// 		cancelButtonText: 'Close',
-		// 		confirmButtonColor: '#3085d6',
-		// 		cancelButtonColor: '#d33',
-		// 		reverseButtons: false
-		// 	},
-		// 	customClass: {},
-		// 	fillBg: {
-		// 		class: '.fill'
-		// 	}
-		// },
 		htmlEmbed: {
 			showPreviews: true,
 		},
