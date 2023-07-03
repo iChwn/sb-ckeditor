@@ -39,7 +39,13 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 
-export default class SbEditor extends ClassicEditorBase {
+/** @ts-ignore */
+class SbEditor extends ClassicEditorBase {
+	constructor(props) {
+		super(props);
+		console.log("Init SbEditor")
+	}
+
 	static builtinPlugins = [
 		Essentials,
 		UploadAdapter,
@@ -191,7 +197,4 @@ export default class SbEditor extends ClassicEditorBase {
 	};
 }
 
-
-
-window.SbEditor = SbEditor;
- 
+export default SbEditor
