@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>CKEditor 5 Framework – Quick start</title>
+	</head>
+	<body>
+		<div id="editor">
+			<p>Editor content goes here.</p>
+		</div>
+
+		<script src="build/bundle.js"></script>
+		<script>
+			SbEditor.create(document.querySelector('#editor'), {
+				language: {
+					// The UI will be English.
+					ui: 'en',
+					// But the content will be edited in Arabic.
+					content: 'en',
+				},
+				// extraPlugins: [ CustomFigureAttributes ],
+			})
+				.then((editor) => {
+					window.editor = editor
+					editor.model.document.on('change', () => {
+						console.log(editor.getData())
+					})
+					// editor.setData(`<p>Question Answer&nbsp;<span class="placeholder">{Mantap}</span></p>`)
+					// console.log("initialized")
+					// editor.setData(`<p>
+					// 	This is Question
+					// 	<div class="simple-box">
+					// 		<span class="simple-box-title">answer</span>
+					// 	</div>
+					// </p>`)
+				})
+				.catch((error) => {
+					console.error('There was a problem initializing the editor.', error)
+				})
+		</script>
+	</body>
+</html>
