@@ -116,7 +116,7 @@ class UploadAdapter {
 		// Prepare the form data.
 		const data = new FormData()
 		data.append('file', file)
-		data.append('key', 'partner-academy-cover')
+		data.append('key', 'blog-modules')
     // await convertToBase64(file)
     //   .then(base64File => {
     //     // console.log(base64File)

@@ -26,7 +26,7 @@ import CustomImageUploadAdapter from './ckAdapter/CustomImageUploadAdapter';
 class SbEditor extends ClassicEditorBase {
 	constructor(props) {
 		super(props);
-		console.log("Init SbEditor")
+		console.log("Init SbEditor 15")
 	}
 
 	static builtinPlugins = [

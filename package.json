@@ -1,7 +1,7 @@
 {
   "name": "@ichwan-sosbread/sb-ckeditor",
-  "version": "1.0.6",
-  "description": "a sample custom ckeditor package",
+  "version": "1.0.15",
+  "description": "a sample custom ckeditor package for personal usage",
   "main": "./build/bundle.js",
   "files": [
     "build"

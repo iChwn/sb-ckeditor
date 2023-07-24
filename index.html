@@ -12,6 +12,7 @@
 		<script src="build/bundle.js"></script>
 		<script>
 			SbEditor.create(document.querySelector('#editor'), {
+				uploadFileUrl: "localhst",
 				language: {
 					// The UI will be English.
 					ui: 'en',
@@ -25,7 +26,7 @@
 					editor.model.document.on('change', () => {
 						// console.log(editor.getData())
 					})
-					// editor.setData(`<p>Question Answer&nbsp;<span class="placeholder">{Mantap}</span></p>`)
+					editor.setData(`<p>Question Answer&nbsp;<span class="placeholder">{Mantap}</span></p>`)
 					// console.log("initialized")
 					// editor.setData(`<p>
 					// 	This is Question
