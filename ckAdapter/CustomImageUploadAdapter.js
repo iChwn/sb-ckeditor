@@ -51,7 +51,7 @@ class UploadAdapter {
 	// Initializes the XMLHttpRequest object using the URL passed to the constructor.
 	_initRequest() {
 		const xhr = (this.xhr = new XMLHttpRequest())
-		const editorConfig = editor.config._config
+		const editorConfig = this.editor.config._config
 		// Note that your request may look different. It is up to you and your editor
 		// integration to choose the right communication channel. This example uses
 		// a POST request with JSON as a data structure but your configuration
