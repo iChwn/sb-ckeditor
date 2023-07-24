@@ -15,16 +15,19 @@ const convertToBase64 = (file) => {
 class CustomImageUploadAdapter extends Plugin {
 	init() {
 		const editor = this.editor
+		// const editorConfig = editor.config._config
+		// console.log(editorConfig)
 		// Register the image upload adapter
 		editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-			return new UploadAdapter(loader)
+			return new UploadAdapter(loader, editor)
 		}
 	}
 }
 
 class UploadAdapter {
-	constructor(loader) {
+	constructor(loader, editor) {
 		this.loader = loader
+		this.editor = editor
 	}
 
 	upload() {
@@ -46,13 +49,15 @@ class UploadAdapter {
 	}
 
 	// Initializes the XMLHttpRequest object using the URL passed to the constructor.
-	_initRequest(file) {
+	_initRequest() {
 		const xhr = (this.xhr = new XMLHttpRequest())
+		const editorConfig = editor.config._config
 		// Note that your request may look different. It is up to you and your editor
 		// integration to choose the right communication channel. This example uses
 		// a POST request with JSON as a data structure but your configuration
 		// could be different.
-		xhr.open('POST', 'http://example.com/image/upload/path', true)
+		console.log(editorConfig)
+		xhr.open('POST', 'https://api-dev.socialbread.id/storage/api/uploadFiles', true)
 		xhr.responseType = 'json'
 	}
 
@@ -62,7 +67,12 @@ class UploadAdapter {
 		const loader = this.loader
 		const genericErrorText = `Couldn't upload file: ${file.name}.`
 
-		xhr.addEventListener('error', () => reject(genericErrorText))
+		xhr.addEventListener('error', () => {
+			// resolve({
+			// 	default: 'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80',
+			// })
+			reject(genericErrorText)
+		})
 		xhr.addEventListener('abort', () => reject())
 		xhr.addEventListener('load', () => {
 			const response = xhr.response
@@ -84,7 +94,7 @@ class UploadAdapter {
 			// This URL will be used to display the image in the content. Learn more in the
 			// UploadAdapter#upload documentation.
 			resolve({
-				default: response.url,
+				default: 'https://social-bread-dev.s3.ap-southeast-1.amazonaws.com/' + response.data,
 			})
 		})
 
@@ -105,11 +115,13 @@ class UploadAdapter {
 	async _sendRequest(file) {
 		// Prepare the form data.
 		const data = new FormData()
-		data.append('upload', file)
-    await convertToBase64(file)
-      .then(base64File => {
-        console.log(base64File)
-      })
+		data.append('file', file)
+		data.append('key', 'partner-academy-cover')
+    // await convertToBase64(file)
+    //   .then(base64File => {
+    //     // console.log(base64File)
+		// 		return 'www.google.com'
+    //   })
 
 		// Important note: This is the right place to implement security mechanisms
 		// like authentication and CSRF protection. For instance, you can use
@@ -117,7 +129,7 @@ class UploadAdapter {
 		// the CSRF token generated earlier by your application.
 
 		// Send the request.
-		// this.xhr.send(data)
+		this.xhr.send(data)
 	}
 }
 
